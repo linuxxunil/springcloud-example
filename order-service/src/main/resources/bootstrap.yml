@@ -3,6 +3,9 @@ spring:
     name: orderservice
   profiles:
     active: dev # 环境
+  
+  # 1. 必須 Nacos的Configuration建立YAML
+  # 2. 名稱：userservice.yaml 和 userservice-dev.yaml
   cloud:
     nacos:
       server-addr: localhost:8848 # nacos地址

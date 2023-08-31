@@ -1,0 +1,45 @@
+server:
+  port: 8080
+spring:
+  main: 
+    web-application-type: reactive
+  # Database 
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/cloud_user?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Taipei
+    username: yesee
+    password: yesee
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      initial-size: 5 #连接池初始化大小
+      min-idle: 10 #最小空闲连接数
+      max-active: 20 #最大连接数
+      break-after-acquire-failure: true
+      connection-error-retry-attempts: 10
+      time-between-connect-error-millis: 1000
+      web-stat-filter:
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*" #不统计这些请求数据
+      stat-view-servlet: #访问监控网页的登录用户名和密码
+        login-username: druid
+        login-password: druid
+
+  # 只要在 Nacos 上設定 gatewayservice.yaml，設定值就可以更新對應的路徑//
+  cloud:
+    gateway:
+      routes:
+        - id: user-service # 路由标示，必须唯一
+          uri: lb://userservice # 路由的目标地址
+          predicates: # 路由断言，判断请求是否符合规则
+            - Path=/user/** # 路径断言，判断路径是否是以/user开头，如果是则符合
+        - id: order-service
+          uri: lb://orderservice
+          predicates:
+            - Path=/order/**
+
+  # JPA
+  jpa:
+    show-sql: true
+
+# profiles 優先級：
+pattern:
+  name: gatewayservice-dev.yaml(Nacos) > gatewayservice.yaml(Nacos) > application.yml(Local)
+  dateformat: yyyy-MM-dd
