@@ -11,6 +11,10 @@ import org.springframework.web.server.ServerWebExchange;
 
 import reactor.core.publisher.Mono;
 
+/**
+ * 過濾順序
+ *  路由過濾器-> defaultFilter -> GlobalFilter
+ */
 @Component
 public class GatewayFilter implements GlobalFilter, Ordered {
     @Override

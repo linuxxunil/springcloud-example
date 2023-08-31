@@ -25,6 +25,22 @@ spring:
   # 只要在 Nacos 上設定 gatewayservice.yaml，設定值就可以更新對應的路徑//
   cloud:
     gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        corsConfigurations:
+          '[/**]': 
+            allowedOrigins: # 允許那些網站跨域
+              - "http://127.0.0.1:8080"
+              - "http://localhost:8080"
+            allowedMethods: # 允許那些方法
+              - "GET"
+              - "POST"
+              - "DELETE"
+              - "PUT"
+              - "OPTIONS"
+            allowedHeaders: "*" # 允許在請求加入Header
+            allowCredentials: true # 允許攜帶Cookie
+            maxAge: 360000 #允許跨域的檢測時間
       routes:
         - id: user-service # 路由标示，必须唯一
           uri: lb://userservice # 路由的目标地址
