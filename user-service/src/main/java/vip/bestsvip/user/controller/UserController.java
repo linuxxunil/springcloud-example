@@ -1,8 +1,8 @@
 package vip.bestsvip.user.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import vip.bestsvip.user.config.PatternProperties;
 import vip.bestsvip.user.entity.User;
+import vip.bestsvip.user.properties.PatternProperties;
 import vip.bestsvip.user.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +20,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // @Value("${pattern.dateformat}")
-    // private String dateformat;
 
     @Autowired
     private PatternProperties properties;

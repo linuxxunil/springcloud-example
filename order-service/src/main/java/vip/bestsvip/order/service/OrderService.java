@@ -7,20 +7,20 @@ import org.springframework.stereotype.Service;
 import vip.bestsvip.order.entity.Orders;
 import vip.bestsvip.order.feign.clients.UserClient;
 import vip.bestsvip.order.feign.pojo.User;
-import vip.bestsvip.order.repository.OrderRepository;
+import vip.bestsvip.order.repository.OrdersRepository;
 
 @Service
 public class OrderService {
 
     @Autowired
-    private OrderRepository orderRepository;
+    private OrdersRepository ordersRepository;
 
     @Autowired
     private UserClient userClient;
 
     public Orders queryOrderById(Long orderId) {
         // 1.查询订单
-        Orders order = orderRepository.findById(orderId).get();
+        Orders order = ordersRepository.findById(orderId).get();
         // 2.用Feign远程调用
         User user = userClient.findById(order.getUserId());
         // 3.封装user到Order

@@ -7,7 +7,7 @@ import vip.bestsvip.order.entity.Orders;
 import java.util.Optional;
 
 
-public interface OrderRepository extends JpaRepository<Orders, Long>, JpaSpecificationExecutor<Orders> {
+public interface OrdersRepository extends JpaRepository<Orders, Long>, JpaSpecificationExecutor<Orders> {
 
     Optional<Orders> findById(Long id);
 }

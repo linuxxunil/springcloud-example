@@ -1,6 +1,7 @@
 server:
   port: 28080
 spring:
+  # Database 
   datasource:
     url: jdbc:mysql://localhost:3306/cloud_order?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Taipei
     username: yesee
@@ -20,9 +21,6 @@ spring:
         login-password: druid
   jpa:
     show-sql: true
-    properties: 
-      hibernate: 
-        format_sql: true
 
 logging: 
   level: 
@@ -30,32 +28,13 @@ logging:
       hibernate: 
         SQL: DEBUG
         
-  application:
-    name: orderservice
-#  cloud:
-#    nacos:
-#      server-addr: nacos:8848 # nacos服务地址
-#      discovery:
-#        namespace: 4d6ce343-9e1b-44df-a90f-2cf2b6b3d177 # dev环境
-#        ephemeral: false # 是否是临时实例
-
-eureka:
-  client:
-    service-url:  # eureka的地址信息
-      defaultZone: http://127.0.0.1:11000/eureka
-#userservice:
-#  ribbon:
-#    NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule  # 负载均衡规则
-ribbon:
-  eager-load:
-    enabled: true # 开启饥饿加载
-    clients: # 指定饥饿加载的服务名称
-      - userservice
-
-
-
 feign:
   httpclient:
     enabled: true # 支持HttpClient的开关
     max-connections: 200 # 最大连接数
     max-connections-per-route: 50 # 单个路径的最大连接数
+
+# profiles 優先級：
+pattern:
+  name: orderservice-dev.yaml(Nacos) > orderservice.yaml(Nacos) > application.yml(Local)
+  dateformat: yyyy-MM-dd

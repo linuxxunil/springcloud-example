@@ -1,9 +1,0 @@
-server:
-  port: 11000 # 服务端口
-spring:
-  application:
-    name: eureka-service # eureka的服务名称
-eureka:
-  client:
-    service-url: # eureka的地址信息
-      defaultZone: http://127.0.0.1:11000/eureka

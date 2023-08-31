@@ -1,6 +1,7 @@
 server:
   port: 18080
 spring:
+  # Database 
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/cloud_user?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Taipei
     username: yesee
@@ -19,10 +20,11 @@ spring:
         login-username: druid
         login-password: druid
 
+  # JPA
+  jpa:
+    show-sql: true
 
-eureka:
-  client:
-    service-url:  # eureka的地址信息
-      defaultZone: http://127.0.0.1:11000/eureka
+# profiles 優先級：
 pattern:
-  name: 本地环境local
+  name: userservice-dev.yaml(Nacos) > userservice.yaml(Nacos) > application.yml(Local)
+  dateformat: yyyy-MM-dd
